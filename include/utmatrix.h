@@ -267,12 +267,12 @@ TMatrix<ValType>::TMatrix(const TVector<TVector<ValType> > &mt) :
 template <class ValType> // сравнение
 bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const
 {
-	if (mt.pVector[0].Size != pVector[0].Size)
+	if (Size != mt.Size)
 		return false;
 	else
-		for (int i = 0; i < pVector[0].Size; i++)
+		for (int i = 0; i < Size; i++)
 		{
-			if (mt.pVector[i] != pVector[i].Size)
+			if (pVector[i] != mt.pVector[i])
 				return false;
 		}
 	return true;
@@ -281,12 +281,12 @@ bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const
 template <class ValType> // сравнение
 bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
 {
-	if (mt.pVector[0].Size != pVector[0].Size)
+	if (Size != mt.Size)
 		return true;
 	else
-		for (int i = 0; i < pVector[0].Size; i++)
+		for (int i = 0; i < Size; i++)
 		{
-			if (mt.pVector[i] != pVector[i].Size)
+			if (pVector[i] != mt.pVector[i])
 				return true;
 		}
 	return false;
@@ -295,25 +295,23 @@ bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
 template <class ValType> // присваивание
 TMatrix<ValType>& TMatrix<ValType>::operator=(const TMatrix<ValType> &mt)
 {
-	//
-	if (mt.pVector[0].Size == pVector[0].Size)
+	Size = mt.Size;
+	delete[] pVector;
+	pVector = new TVector<ValType>[Size];
+	for (int i = 0; i < Size; i++)
 	{
-		for (int i = 0; i < pVector[0].Size; i++)
-		{
 			pVector[i] = mt.pVector[i];
-		}
-		return *this;
 	}
-	else throw "error";
+	return *this;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сложение
 TMatrix<ValType> TMatrix<ValType>::operator+(const TMatrix<ValType> &mt)
 {
-	if (mt.pVector[0].Size == pVector[0].Size)
+	if (Size == mt.Size)
 	{
 		TMatrix tmp(*this);
-		for (int i = 0; i < pVector[0].Size; i++)
+		for (int i = 0; i < Size; i++)
 		{
 			tmp.pVector[i] = pVector[i] + mt.pVector[i];
 		}
@@ -325,12 +323,12 @@ TMatrix<ValType> TMatrix<ValType>::operator+(const TMatrix<ValType> &mt)
 template <class ValType> // вычитание
 TMatrix<ValType> TMatrix<ValType>::operator-(const TMatrix<ValType> &mt)
 {
-	if (mt.pVector[0].Size == pVector[0].Size)
+	if (Size == mt.Size)
 	{
 		TMatrix tmp(*this);
-		for (int i = 0; i < pVector[0].Size; i++)
+		for (int i = 0; i < Size; i++)
 		{
-			tmp.Vector[i] = pVector[i] - mt.pVector[i];
+			tmp.pVector[i] = pVector[i] - mt.pVector[i];
 		}
 		return tmp;
 	}
