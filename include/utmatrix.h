@@ -47,14 +47,16 @@ public:
   // ввод-вывод
   friend istream& operator>>(istream &in, TVector &v)
   {
-    for (int i = 0; i < v.Size; i++)
-      in >> v.pVector[i];
+	  for (int i = 0; i < v.Size; i++)
+		  in >> v.pVector[i];
     return in;
   }
   friend ostream& operator<<(ostream &out, const TVector &v)
   {
-    for (int i = 0; i < v.Size; i++)
-      out << v.pVector[i] << ' ';
+	  for (int i = 0; i < v.StartIndex; i++)
+		  out << '-' << ' ';
+	  for (int j = 0; j < v.Size; j++)
+		  out << v.pVector[j] << ' ';
     return out;
   }
 };
@@ -93,7 +95,7 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-	if (pos >= 0 && pos < Size)
+	if (pos >= StartIndex && pos < Size + StartIndex)
 		return pVector[pos - StartIndex];
 	else
 		throw "invalid value";

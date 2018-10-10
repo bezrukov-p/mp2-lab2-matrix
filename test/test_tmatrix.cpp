@@ -17,7 +17,7 @@ TEST(TMatrix, throws_when_create_matrix_with_negative_length)
   ASSERT_ANY_THROW(TMatrix<int> m(-5));
 }
 
-TEST(TMatrix, can_create_copied_matrix) ////
+TEST(TMatrix, can_create_copied_matrix)
 {
   TMatrix<int> m(5);
 
@@ -44,11 +44,11 @@ TEST(TMatrix, can_get_size)
 	ASSERT_NO_THROW(m.GetSize());
 }
 
-//TEST(TMatrix, can_set_and_get_element)
-//{
-//	TMatrix<int> m(5);
-//	ASSERT_NO_THROW(m[0][0]);
-//}
+TEST(TMatrix, can_set_and_get_element)
+{
+	TMatrix<int> m(5);
+	ASSERT_NO_THROW(m[0][0]);
+}
 
 TEST(TMatrix, throws_when_set_element_with_negative_index)
 {
